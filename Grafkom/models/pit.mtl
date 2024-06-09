@@ -1,0 +1,11 @@
+
+
+newmtl colormap
+Kd 0.8 0.5 0.3
+map_Kd tekstur/wood2.jpg
+map_bump
+bump
+
+
+
+

@@ -1,0 +1,16 @@
+# Exported from Wings 3D 1.5.3
+newmtl Green_Roof
+map_Kd tekstur/tenda3.jpeg
+
+newmtl Leafs
+Ns 100.0
+d 1.0
+illum 2
+map_Kd tekstur/skin.jpeg
+
+newmtl Wood
+Ns 100.0
+d 1.0
+illum 2
+Kd 0.666667 0.545098 0.356863
+map_Kd tekstur/47074.jpg

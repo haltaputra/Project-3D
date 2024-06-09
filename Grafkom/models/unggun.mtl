@@ -1,0 +1,7 @@
+# Created by Kenney (www.kenney.nl)
+
+newmtl colormap
+
+map_Kd tekstur/wood4.jpeg
+
+
