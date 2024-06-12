@@ -86,16 +86,43 @@ function init(){
 	meshFloor.material.map = floorTexture;
 	
 	// cahaya
-	ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+	ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 	scene.add(ambientLight);
-	
-	light = new THREE.PointLight(0xffffff, 0.8, 200);
+
+	light = new THREE.PointLight(0xffffff, 1, 70);
 	light.position.set(0,9,0);
 	light.castShadow = true;
 	light.shadow.camera.near = 0.1;
 	light.shadow.camera.far = 25;
 	scene.add(light);
+
+	// cahaya 2
+	ambientLight = new THREE.AmbientLight(0xff6600, 0);
+	scene.add(ambientLight);
 	
+	light = new THREE.PointLight(0xff6600, 4, 6);
+	light.position.set(-1, 0.4, 2);
+	light.castShadow = true;
+	light.shadow.camera.near = 0.1;
+	light.shadow.camera.far = 25;
+	scene.add(light);
+	
+	// Membuat bentuk api 
+	function createFire(positionX, positionY, positionZ) {
+		var fireGeometry = new THREE.ConeGeometry(0.1, 0.7, 32);
+		var fireTexture = new THREE.TextureLoader().load("tekstur/api.jpeg");
+		var fireMaterial = new THREE.MeshBasicMaterial({ map: fireTexture });
+		var fire = new THREE.Mesh(fireGeometry, fireMaterial);
+		fire.position.set(positionX, positionY, positionZ); // Atur posisi api
+		scene.add(fire);
+	}
+
+	// Menambahkan beberapa bentuk api di posisi yang berbeda
+	createFire(-0.9, 0.5, 2);
+	createFire(-1.2, 0.3, 2.2);
+	createFire(-1, 0.2, 2.1);
+	createFire(-0.8, 0.2, 2.2);
+	createFire(-1.1, 0.2, 1.9);
 	
 	// Texture kotak 
 	var textureLoader = new THREE.TextureLoader(loadingManager);
@@ -343,10 +370,21 @@ document.addEventListener('mousemove', function(event) {
         var movementX = event.clientX - previousMousePosition.x;
         var movementY = event.clientY - previousMousePosition.y;
 
-        camera.rotation.y += movementX * 0.01;
-        camera.rotation.x += movementY * 0.01;
+        camera.rotation.y -= movementX * 0.01;
+        camera.rotation.x -= movementY * 0.01;
 
         previousMousePosition = { x: event.clientX, y: event.clientY };
+    }
+});
+
+// Fungsi untuk menghidupkan dan mematikan cahaya saat tombol 1 ditekan
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 49) { // Tombol 1
+        if (light.intensity === 0) {
+            light.intensity = 2; // Hidupkan cahaya
+        } else {
+            light.intensity = 0; // Matikan cahaya
+        }
     }
 });
 
