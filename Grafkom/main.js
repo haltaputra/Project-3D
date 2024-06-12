@@ -320,68 +320,35 @@ function keyUp(event){
 	keyboard[event.keyCode] = false;
 }
 
-// kontrol keyboard dan mouse
+// Kontrol keyboard dan mouse
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
-window.onload = init;
-
-// Logika menggerakkan kamera ke kanan dan ke kiri menggunakan mouse
+// Logika menggerakkan kamera menggunakan mouse
 var isDragging = false;
-var previousMousePosition = {
-	x: 0,
-	y: 0
-};
+var previousMousePosition = { x: 0, y: 0 };
 
 document.addEventListener('mousedown', function(event) {
-	isDragging = true;
-	previousMousePosition = {
-		x: event.clientX,
-		y: event.clientY
-	};
+    isDragging = true;
+    previousMousePosition = { x: event.clientX, y: event.clientY };
 });
 
 document.addEventListener('mouseup', function(event) {
-	isDragging = false;
+    isDragging = false;
 });
 
-document.addEventListener('mousemove', function(event) {
-	if (isDragging) {
-		var movementX = event.clientX - previousMousePosition.x;
-
-		if (movementX < 0) {
-			// gerak kamera kanan
-			camera.position.x += Math.cos(camera.rotation.y) * player.speed;
-			camera.position.z += Math.sin(camera.rotation.y) * player.speed;
-		} else if (movementX > 0) {
-			// gerak kamera kiri
-			camera.position.x -= Math.cos(camera.rotation.y) * player.speed;
-			camera.position.z -= Math.sin(camera.rotation.y) * player.speed;
-		}
-
-		previousMousePosition = {
-			x: event.clientX,
-			y: event.clientY
-		};
-	}
-});
-
-// atas dan bawah
+// Kontrol kamera untuk melihat ke segala arah menggunakan mouse
 document.addEventListener('mousemove', function(event) {
     if (isDragging) {
+        var movementX = event.clientX - previousMousePosition.x;
         var movementY = event.clientY - previousMousePosition.y;
 
-        if (movementY > 0) {
-            // gerak kamera atas
-            camera.position.y -= player.speed;
-        } else if (movementY < 0) {
-            // gerak kamera bawah
-            camera.position.y += player.speed;
-        }
+        camera.rotation.y += movementX * 0.01;
+        camera.rotation.x += movementY * 0.01;
 
-        previousMousePosition = {
-            x: event.clientX,
-            y: event.clientY
-        };
+        previousMousePosition = { x: event.clientX, y: event.clientY };
     }
 });
+
+window.onload = init;
+
