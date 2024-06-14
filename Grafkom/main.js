@@ -370,8 +370,8 @@ document.addEventListener('mousemove', function(event) {
         var movementX = event.clientX - previousMousePosition.x;
         var movementY = event.clientY - previousMousePosition.y;
 
-        camera.rotation.y -= movementX * 0.01;
-        camera.rotation.x -= movementY * 0.01;
+        camera.rotation.y += movementX * 0.01;
+        camera.rotation.x += movementY * 0.01;
 
         previousMousePosition = { x: event.clientX, y: event.clientY };
     }
